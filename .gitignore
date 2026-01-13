@@ -1,2 +1,6 @@
 __pycache__/
 dataset/
+.ipynb_checkpoints/
+*.parquet
+gcp-service-account.json
+.DS_Store
