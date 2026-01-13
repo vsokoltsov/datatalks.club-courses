@@ -4,3 +4,5 @@ dataset/
 *.parquet
 gcp-service-account.json
 .DS_Store
+.terraform*
+*.tfstate*
