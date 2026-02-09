@@ -6,3 +6,4 @@ gcp-service-account.json
 .DS_Store
 .terraform*
 *.tfstate*
+gcs.json
