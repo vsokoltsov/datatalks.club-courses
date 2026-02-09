@@ -1,0 +1,1 @@
+select count(*) from `zoomcamp.yellow_taxi_trip_records` where fare_amount = 0 or fare_amount is null;
