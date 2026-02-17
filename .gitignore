@@ -7,3 +7,7 @@ gcp-service-account.json
 .terraform*
 *.tfstate*
 gcs.json
+.bruin.yml
+logs/runs
+logs/*.log
+*.py[cod]
