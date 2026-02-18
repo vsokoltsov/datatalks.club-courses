@@ -3,13 +3,14 @@ name = "datatalks-club"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.14"
 dependencies = [
     "click>=8.1.7",
     "dbt>=1.0.0.40.14",
     "dbt-bigquery>=1.11.0",
     "dbt-core>=1.10.19",
-    "google-cloud-storage>=3.2",
+    "dlt[duckdb,workspace]>=1.22.0",
+    "google-cloud-storage>=2.4,<3.2",
     "ipykernel>=6.30.1",
     "ipython>=9.5.0",
     "jupyter>=1.1.1",

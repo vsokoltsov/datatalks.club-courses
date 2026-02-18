@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+      "dlt": {
+        "command": "uv",
+        "args": [
+          "run",
+          "--with",
+          "dlt[duckdb]",
+          "--with",
+          "dlt-mcp[search]",
+          "python",
+          "-m",
+          "dlt_mcp"
+        ]
+      }
+    }
+  }
