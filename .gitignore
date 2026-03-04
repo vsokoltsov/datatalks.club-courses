@@ -11,3 +11,8 @@ gcs.json
 logs/runs
 logs/*.log
 *.py[cod]
+06_batch/lesson/data/
+06_batch/lesson/fhvhv/
+06_batch/lesson/_write_test/
+06_batch/output/
+gcp.json
