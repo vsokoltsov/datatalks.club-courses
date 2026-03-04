@@ -1,0 +1,73 @@
+services:
+  spark-master:
+    image: apache/spark:4.1.1-scala2.13-java21-python3-r-ubuntu
+    container_name: spark-master
+    hostname: spark-master
+    volumes:
+      - ./lesson:/workspace
+      - ./homework:/homework
+    working_dir: /homework
+    ports:
+      - "8080:8080"   # Spark Master UI
+      - "7077:7077"   # Spark Master port
+      - "4040:4040"   # Spark Application UI
+    environment:
+    - SPARK_PUBLIC_DNS=localhost
+    - SPARK_MASTER_HOST=spark-master
+    command: >
+      bash -lc "/opt/spark/sbin/start-master.sh
+      --host spark-master
+      --port 7077
+      --webui-port 8080
+      && tail -f /opt/spark/logs/*"
+
+  spark-worker:
+    image: apache/spark:4.1.1-scala2.13-java21-python3-r-ubuntu
+    container_name: spark-worker
+    hostname: spark-worker
+    volumes:
+      - ./lesson:/workspace
+      - ./homework:/homework
+    working_dir: /homework
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"   # Worker UI
+    environment:
+      - SPARK_PUBLIC_DNS=localhost
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+    command: >
+      bash -lc "/opt/spark/sbin/start-worker.sh
+      spark://spark-master:7077
+      --webui-port 8081
+      && tail -f /opt/spark/logs/*"
+
+  jupyter:
+    image: apache/spark:4.1.1-scala2.13-java21-python3-r-ubuntu
+    container_name: spark-jupyter
+    depends_on:
+      - spark-master
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./lesson:/workspace
+      - ./homework:/homework
+    working_dir: /homework
+    environment:
+      - HOME=/tmp
+      - PIP_DISABLE_PIP_VERSION_CHECK=1
+      - PATH=/tmp/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    command: >
+      bash -lc "
+        mkdir -p /tmp/.local/bin &&
+        ln -sf /usr/bin/python3 /tmp/.local/bin/python &&
+        python --version &&
+        python3 -m pip install --user --no-cache-dir pyspark==4.1.1 notebook pandas pyarrow ipykernel &&
+        python3 -m notebook --ip=0.0.0.0 --no-browser --allow-root
+          --NotebookApp.token=''
+          --NotebookApp.password=''
+          --NotebookApp.allow_origin='*'
+          --NotebookApp.disable_check_xsrf=True
+          --NotebookApp.allow_remote_access=True
+      "
