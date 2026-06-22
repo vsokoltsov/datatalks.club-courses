@@ -16,3 +16,6 @@ de_zoomcamp/06-batch/lesson/fhvhv/
 de_zoomcamp/06-batch/lesson/_write_test/
 de_zoomcamp/06-batch/homework/output/
 gcp.json
+.venv/
+.vscode/
+.env
