@@ -19,3 +19,5 @@ gcp.json
 .venv/
 .vscode/
 .env
+llm_zoomcamp/02-vector-search/models/
+.DS_Store
