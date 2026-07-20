@@ -1,0 +1,15 @@
+[project]
+name = "workshop"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dlt[duckdb,hub]>=1.22.0",
+    "logfire>=3.14",
+    "minsearch>=0.2.0",
+    "openai>=2.45.0",
+    "pydantic-ai>=1.0",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
+]
